@@ -20,6 +20,7 @@ export async function POST(request: Request) {
     answerText: body.answer,
     smileScore: body.smileScore,
     feedback: body.feedback,
+    memo: body.memo,
   });
 
   return Response.json({ ok: true });

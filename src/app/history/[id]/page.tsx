@@ -20,6 +20,7 @@ export default async function HistoryDetail({
       <p>😊 笑顔スコア {row.smileScore ?? 0}%</p>
       <p style={{ whiteSpace: "pre-wrap" }}>🗣 {row.answerText}</p>
       <p style={{ whiteSpace: "pre-wrap" }}>🤖 {row.feedback}</p>
+      <p style={{ whiteSpace: "pre-wrap" }}>📝 メモ：{row.memo}</p>
     </main>
   );
 }
