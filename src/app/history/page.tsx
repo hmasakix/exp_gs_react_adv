@@ -1,15 +1,28 @@
 // app/history/page.tsx
 import { db } from "@/db";
 import { evaluations } from "@/db/schema";
-import { desc } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
+import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
 import DeleteButton from "./DeleteButton";
 
-// このページは毎回サーバーで作り直す（DBの最新を必ず出すため）
 export const dynamic = "force-dynamic";
 
 export default async function HistoryPage() {
-  const rows = await db.select().from(evaluations).orderBy(desc(evaluations.createdAt));
+  const { userId } = await auth();
+  if (!userId) {
+    return (
+      <main className="p-8">
+        <p>履歴を見るにはログインしてください。</p>
+      </main>
+    );
+  }
+
+  const rows = await db
+    .select()
+    .from(evaluations)
+    .where(eq(evaluations.adminId, userId))
+    .orderBy(desc(evaluations.createdAt));
 
   return (
     <main style={{ padding: 24, maxWidth: 640 }}>

@@ -37,6 +37,16 @@ export default function Home() {
     alert("保存しました");
   }
 
+  async function deliver() {
+    const res = await fetch("/api/deliver", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ feedback }),
+    });
+    if (res.ok) alert("メールを送りました");
+    else alert("メール送信に失敗しました（無料枠では自分の登録メール宛のみ送れます）");
+  }
+
   async function speak() {
     audioRef.current?.pause();
     setSpeaking(true);
@@ -121,6 +131,12 @@ export default function Home() {
               className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg transition-colors"
             >
               💾 保存する
+            </button>
+            <button
+              onClick={deliver}
+              className="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded-lg transition-colors"
+            >
+              ✉ メールで受け取る
             </button>
           </div>
         </div>
