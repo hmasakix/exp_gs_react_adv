@@ -4,6 +4,7 @@
 import { useState, useRef } from "react";
 import FaceMeter from "./FaceMeter";
 import Recorder from "./Recorder";
+import Link from "next/link";
 
 export default function Home() {
   const [answer, setAnswer] = useState("");
@@ -75,6 +76,8 @@ export default function Home() {
   return (
     <main className="max-w-2xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4">AI練習コーチ</h1>
+      <Link href="/history" className="text-sm text-blue-600 underline">履歴を見る
+      </Link>
 
       <FaceMeter onScore={setSmileScore} />
       <p className="text-sm text-gray-600 mt-2">いまの笑顔率：{smileScore}%</p>
