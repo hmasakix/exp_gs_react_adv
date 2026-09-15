@@ -25,24 +25,36 @@ export default async function HistoryPage() {
     .orderBy(desc(evaluations.createdAt));
 
   return (
-    <main style={{ padding: 24, maxWidth: 640 }}>
+    <main style={{ padding: 24, maxWidth: 640, margin: "0 auto" }}>
       <Link href="/" style={{ display: "inline-block", marginBottom: 16 }}>
-      ← AI練習コーチに戻る
+        ← AI練習コーチに戻る
       </Link>
       <h1>練習の記録（{rows.length}件）</h1>
       {rows.length === 0 ? (
         <p>まだありません。練習して「保存」しましょう。</p>
       ) : (
-        <ul>
-          {rows.map((row) => (
-            <li key={row.id}>
-              <Link href={`/history/${row.id}`}>
-                {row.prompt} ／ 笑顔 {row.smileScore ?? 0}%
-              </Link>
-              <DeleteButton id={row.id} />
-            </li>
-          ))}
-        </ul>
+        <table className="w-full border-collapse border border-gray-300 mt-4">
+          <thead>
+            <tr>
+              <th className="border border-gray-300 px-3 py-2 text-left">お題</th>
+              <th className="border border-gray-300 px-3 py-2 text-left">笑顔率</th>
+              <th className="border border-gray-300 px-3 py-2 text-left">削除</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <tr key={row.id}>
+                <td className="border border-gray-300 px-3 py-2">
+                  <Link href={`/history/${row.id}`}>{row.prompt}</Link>
+                </td>
+                <td className="border border-gray-300 px-3 py-2">{row.smileScore ?? 0}%</td>
+                <td className="border border-gray-300 px-3 py-2">
+                  <DeleteButton id={row.id} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       )}
     </main>
   );
