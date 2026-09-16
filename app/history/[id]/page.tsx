@@ -12,10 +12,10 @@ export default async function HistoryDetail({
   const rows = await db.select().from(evaluations).where(eq(evaluations.id, Number(id)));
   const row = rows[0];
 
-  if (!row) return <main style={{ padding: 24 }}>見つかりませんでした。</main>;
+  if (!row) return <main style={{ padding: 24, maxWidth: 640, margin: "0 auto" }}>見つかりませんでした。</main>;
 
   return (
-    <main style={{ padding: 24, maxWidth: 640 }}>
+    <main style={{ padding: 24, maxWidth: 640, margin: "0 auto" }}>
       <h1>{row.prompt}</h1>
       <p>😊 笑顔スコア {row.smileScore ?? 0}%</p>
       <p style={{ whiteSpace: "pre-wrap" }}>🗣 {row.answerText}</p>

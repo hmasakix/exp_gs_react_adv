@@ -12,7 +12,7 @@ export default async function HistoryPage() {
   const { userId } = await auth();
   if (!userId) {
     return (
-      <main className="p-8">
+      <main className="p-8 text-center">
         <p>履歴を見るにはログインしてください。</p>
       </main>
     );
@@ -26,9 +26,6 @@ export default async function HistoryPage() {
 
   return (
     <main style={{ padding: 24, maxWidth: 640, margin: "0 auto" }}>
-      <Link href="/" style={{ display: "inline-block", marginBottom: 16 }}>
-        ← AI練習コーチに戻る
-      </Link>
       <h1>練習の記録（{rows.length}件）</h1>
       {rows.length === 0 ? (
         <p>まだありません。練習して「保存」しましょう。</p>
