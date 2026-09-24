@@ -32,12 +32,12 @@ export default async function HistoryDetail({
 
       <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-4">
         <p className="text-xs text-gray-500 mb-1">🗣 回答</p>
-        <p className="whitespace-pre-wrap">{row.answerText}</p>
+        <p className="whitespace-pre-wrap text-gray-900">{row.answerText}</p>
       </div>
 
       <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
         <p className="text-xs text-gray-500 mb-1">🤖 フィードバック</p>
-        <p className="whitespace-pre-wrap">{row.feedback}</p>
+        <p className="whitespace-pre-wrap text-gray-900">{row.feedback}</p>
       </div>
 
       <p className="text-sm text-gray-500 border-t border-gray-200 pt-4">
