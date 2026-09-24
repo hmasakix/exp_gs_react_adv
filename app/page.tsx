@@ -10,9 +10,10 @@ export default function Home() {
   const [memo, setMemo] = useState("");
   const [feedback, setFeedback] = useState("");
   const [loading, setLoading] = useState(false);
-  const [smileScore, setSmileScore] = useState(0);   // ← ② 追加
+  const [smileScore, setSmileScore] = useState(0); // ← ② 追加
   const [speaking, setSpeaking] = useState(false);
-  const topic = "自己紹介を1分で";
+  const topics = ["自己紹介を1分で", "志望動機", "自分の強み", "転職理由"];
+  const [topic, setTopic] = useState(topics[0]);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   async function handleSubmit() {
@@ -25,7 +26,9 @@ export default function Home() {
       body: JSON.stringify({ topic, answer, smileScore }),
     });
     const data = await res.json();
-    setFeedback(data.feedback ?? "エラーが起きました。もう一度お試しください。");
+    setFeedback(
+      data.feedback ?? "エラーが起きました。もう一度お試しください。",
+    );
     setLoading(false);
   }
   async function save() {
@@ -44,7 +47,10 @@ export default function Home() {
       body: JSON.stringify({ feedback }),
     });
     if (res.ok) alert("メールを送りました");
-    else alert("メール送信に失敗しました（無料枠では自分の登録メール宛のみ送れます）");
+    else
+      alert(
+        "メール送信に失敗しました（無料枠では自分の登録メール宛のみ送れます）",
+      );
   }
 
   async function speak() {
@@ -76,7 +82,17 @@ export default function Home() {
     <main className="max-w-2xl mx-auto p-6">
       <FaceMeter onScore={setSmileScore} />
       <p className="text-sm text-gray-600 mt-2">いまの笑顔率：{smileScore}%</p>
-      <p className="text-sm text-gray-600">お題：{topic}</p>
+      <select
+        value={topic}
+        onChange={(e) => setTopic(e.target.value)}
+        className="w-full mt-2 p-2 border border-gray-300 rounded-lg"
+      >
+        {topics.map((t) => (
+          <option key={t} value={t}>
+            {t}
+          </option>
+        ))}
+      </select>
 
       <textarea
         value={answer}
@@ -106,7 +122,6 @@ export default function Home() {
       </button>
 
       {feedback && (
-        
         <div className="mt-6 bg-gray-50 border border-gray-200 rounded-lg p-4">
           <p className="whitespace-pre-wrap">{feedback}</p>
 
@@ -138,7 +153,6 @@ export default function Home() {
             </button>
           </div>
         </div>
-        
       )}
     </main>
   );

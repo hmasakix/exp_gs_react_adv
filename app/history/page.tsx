@@ -33,18 +33,24 @@ export default async function HistoryPage() {
         <table className="w-full border-collapse border border-gray-300 mt-4">
           <thead>
             <tr>
+              <th className="border border-gray-300 px-3 py-2 text-left">id</th>
               <th className="border border-gray-300 px-3 py-2 text-left">お題</th>
               <th className="border border-gray-300 px-3 py-2 text-left">笑顔率</th>
+              <th className="border border-gray-300 px-3 py-2 text-left">作成日時</th>
               <th className="border border-gray-300 px-3 py-2 text-left">削除</th>
             </tr>
           </thead>
           <tbody>
             {rows.map((row) => (
               <tr key={row.id}>
+                <td className="border border-gray-300 px-3 py-2">{row.id}</td>
                 <td className="border border-gray-300 px-3 py-2">
                   <Link href={`/history/${row.id}`}>{row.prompt}</Link>
                 </td>
                 <td className="border border-gray-300 px-3 py-2">{row.smileScore ?? 0}%</td>
+                <td className="border border-gray-300 px-3 py-2">
+                  {row.createdAt.toLocaleString("ja-JP")}
+                </td>
                 <td className="border border-gray-300 px-3 py-2">
                   <DeleteButton id={row.id} />
                 </td>
