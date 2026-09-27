@@ -10,10 +10,15 @@ export default function Home() {
   const [memo, setMemo] = useState("");
   const [feedback, setFeedback] = useState("");
   const [loading, setLoading] = useState(false);
-  const [smileScore, setSmileScore] = useState(0); // ← ② 追加
+  const [smileScore, setSmileScore] = useState(0);
   const [speaking, setSpeaking] = useState(false);
-  const topics = ["自己紹介を1分で", "志望動機", "自分の強み", "転職理由"];
-  const [topic, setTopic] = useState(topics[0]);
+  // 今日の伝達事項3つ（仮：あとで管理者画面から入力する予定）
+  const items = [
+    "イベント開始は10時、終了は18時",
+    "お客様には笑顔で対応",
+    "雨予報の為、傘袋の配布あり。控室に設置。各自で使用する",
+  ];
+  const topic = "今日の伝達事項：" + items.join(" / ");
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   async function handleSubmit() {
@@ -80,32 +85,34 @@ export default function Home() {
 
   return (
     <main className="max-w-2xl mx-auto p-6">
+      <h2 className="text-xl font-bold mb-2">☀ おはようございます！朝礼をはじめましょう</h2>
       <FaceMeter onScore={setSmileScore} />
       <p className="text-sm text-gray-600 mt-2">いまの笑顔率：{smileScore}%</p>
-      <select
-        value={topic}
-        onChange={(e) => setTopic(e.target.value)}
-        className="w-full mt-2 p-2 border border-gray-300 rounded-lg"
-      >
-        {topics.map((t) => (
-          <option key={t} value={t}>
-            {t}
-          </option>
-        ))}
-      </select>
+
+      <div className="mt-3 p-4 border border-gray-300 rounded-lg">
+        <p className="font-bold mb-2">今日の伝達事項（3つ）</p>
+        <ol className="list-decimal pl-5 space-y-1">
+          {items.map((t) => (
+            <li key={t}>{t}</li>
+          ))}
+        </ol>
+        <p className="text-sm text-gray-600 mt-2">
+          笑顔で、3つを声に出して復唱してください
+        </p>
+      </div>
 
       <textarea
         value={answer}
         onChange={(e) => setAnswer(e.target.value)}
         rows={5}
         className="w-full mt-3 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-        placeholder="ここに回答を入力"
+        placeholder="録音すると、ここに復唱した内容が入ります"
       />
       <textarea
         value={memo}
         onChange={(e) => setMemo(e.target.value)}
         rows={3}
-        placeholder="メモ"
+        placeholder="名前（例：山田）"
         className="w-full mt-3 p-3 border border-gray-300 rounded-lg"
       />
 
@@ -118,7 +125,7 @@ export default function Home() {
         disabled={loading}
         className="mt-3 bg-blue-500 hover:bg-blue-600 disabled:bg-gray-300 text-white px-4 py-2 rounded-lg transition-colors"
       >
-        {loading ? "生成中…" : "コーチに見てもらう"}
+        {loading ? "確認中…" : "復唱をチェックしてもらう"}
       </button>
 
       {feedback && (
@@ -143,7 +150,7 @@ export default function Home() {
               onClick={save}
               className="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg transition-colors"
             >
-              💾 保存する
+              💾 朝礼完了（保存）
             </button>
             <button
               onClick={deliver}

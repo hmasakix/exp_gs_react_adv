@@ -38,7 +38,7 @@ export default async function HistoryPage() {
                   href={`/history/${row.id}`}
                   className="font-medium text-blue-600"
                 >
-                  {row.prompt}
+                  {row.memo || "（名前なし）"}
                 </Link>
                 <DeleteButton id={row.id} />
               </div>
