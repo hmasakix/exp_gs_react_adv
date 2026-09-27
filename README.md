@@ -35,8 +35,3 @@
 - CLERK_SECRET_KEY
 - RESEND_API_KEY
 
-```bash
-npm install
-npm run dev
-```
-ブラウザで http://localhost:3000 を開きます。
