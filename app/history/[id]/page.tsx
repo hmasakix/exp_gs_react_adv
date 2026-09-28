@@ -26,8 +26,11 @@ export default async function HistoryDetail({
     <div className="max-w-2xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-4">{row.prompt}</h1>
 
-      <p className="text-sm text-gray-600 mb-4">
+      <p className="text-sm text-gray-600 mb-2">
         😊 笑顔スコア {row.smileScore ?? 0}%
+      </p>
+      <p className="font-bold mb-4">
+        👤 お名前：{row.memo || "（名前なし）"}
       </p>
 
       <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-4">
@@ -39,10 +42,6 @@ export default async function HistoryDetail({
         <p className="text-xs text-gray-500 mb-1">🤖 フィードバック</p>
         <p className="whitespace-pre-wrap text-gray-900">{row.feedback}</p>
       </div>
-
-      <p className="text-sm text-gray-500 border-t border-gray-200 pt-4">
-        📝 メモ：{row.memo}
-      </p>
     </div>
   );
 }
