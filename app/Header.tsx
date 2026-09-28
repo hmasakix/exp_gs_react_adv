@@ -13,7 +13,9 @@ export default function Header() {
     <header className="sticky top-0 z-10 bg-white px-4 py-3">
       <div className="max-w-2xl mx-auto flex items-center justify-between">
         <Link href="/">
-          <p className="text-2xl font-bold text-black">AIイベント朝礼</p>
+          <p className="text-2xl font-bold text-black transition-transform duration-200 hover:-translate-y-0.5 active:-translate-y-0.5">
+            AIイベント朝礼
+          </p>
         </Link>
 
         <Link href="/history" className="text-sm text-blue-600 underline">
