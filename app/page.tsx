@@ -85,9 +85,24 @@ export default function Home() {
 
   return (
     <main className="max-w-2xl mx-auto p-6">
-      <h2 className="text-xl font-bold mb-2">☀ おはようございます！朝礼をはじめましょう</h2>
+      <h2 className="text-xl font-bold mb-2">
+        おはようございます！
+        <br className="sm:hidden" />
+        朝礼をはじめましょう
+      </h2>
       <FaceMeter onScore={setSmileScore} />
       <p className="text-sm text-gray-600 mt-2">いまの笑顔率：{smileScore}%</p>
+
+      <div className="mt-3">
+        <label className="font-bold">お名前</label>
+        <input
+          type="text"
+          value={memo}
+          onChange={(e) => setMemo(e.target.value)}
+          placeholder="例：山田"
+          className="w-full mt-1 p-3 border border-gray-300 rounded-lg"
+        />
+      </div>
 
       <div className="mt-3 p-4 border border-gray-300 rounded-lg">
         <p className="font-bold mb-2">今日の伝達事項（3つ）</p>
@@ -96,10 +111,10 @@ export default function Home() {
             <li key={t}>{t}</li>
           ))}
         </ol>
-        <p className="text-sm text-gray-600 mt-2">
-          笑顔で、3つを声に出して復唱してください
-        </p>
       </div>
+      <p className="font-bold mt-3">
+        笑顔で、3つを声に出して復唱してください
+      </p>
 
       <textarea
         value={answer}
@@ -107,13 +122,6 @@ export default function Home() {
         rows={5}
         className="w-full mt-3 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
         placeholder="録音すると、ここに復唱した内容が入ります"
-      />
-      <textarea
-        value={memo}
-        onChange={(e) => setMemo(e.target.value)}
-        rows={3}
-        placeholder="名前（例：山田）"
-        className="w-full mt-3 p-3 border border-gray-300 rounded-lg"
       />
 
       <div className="mt-3">
@@ -129,7 +137,7 @@ export default function Home() {
       </button>
 
       {feedback && (
-        <div className="mt-6 bg-gray-50 border border-gray-200 rounded-lg p-4">
+        <div className="mt-6 bg-gray-50 text-gray-900 border border-gray-200 rounded-lg p-4">
           <p className="whitespace-pre-wrap">{feedback}</p>
 
           <div className="mt-4 flex gap-2">
